@@ -1,13 +1,13 @@
 <service>
-    <serviceName>concurso</serviceName>
-    <serviceAliases>
-        <alias>concursos</alias>
-    </serviceAliases>
-    <serviceDescription>Concursos de Apretaste!</serviceDescription>
-    <creatorEmail>kumahavana@gmail.com</creatorEmail>
-    <serviceCategory>ocio</serviceCategory>
-    <serviceUsage>
-        <![CDATA[
+	<serviceName>concurso</serviceName>
+	<serviceAliases>
+		<alias>concursos</alias>
+	</serviceAliases>
+	<serviceDescription>Provee concursos de que te permiten ganarte premios espectaculares. Estos concursos son patrocinados por Apretaste y asociados.</serviceDescription>
+	<creatorEmail>kumahavana@gmail.com</creatorEmail>
+	<serviceCategory>ocio</serviceCategory>
+	<serviceUsage>
+		<![CDATA[
 			Escriba un nuevo email a {APRETASTE_EMAIL} y en el asunto ponga la palabra CONCURSO
 
 			Por ejemplo:
@@ -16,5 +16,5 @@
 
 			Recibir&aacute; un email con la lista de concursos.
 		]]>
-    </serviceUsage>
+	</serviceUsage>
 </service>
