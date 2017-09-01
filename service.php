@@ -74,7 +74,7 @@ class Concurso extends Service
 			
 			$imageList = [];
 			foreach ($images as $img)
-				$imageList = [$wwwroot."/public/contestsImages/$id/{$img['filename']}"];
+				$imageList[] = $wwwroot."/public/contestsImages/$id/{$img['filename']}";
 				
             $responseContent = ["contest" => $contest];
 
