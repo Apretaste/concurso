@@ -91,10 +91,16 @@ class Concurso extends Service
 		return new Response();
 	}
 
+	private function getWinners()
+    {
+        $connection = new Connection();
+        $r = $connection->query("SELECT * FROM _concurso WHERE end_date <= now() AND winner1 is not null and winner1 <> '' order by end_date DESC limit 50;");
+        return $r;
+    }
+
 	public function _ganadores(Request $request)
 	{
-		$connection = new Connection();
-		$r = $connection->query("SELECT * FROM _concurso WHERE end_date <= now() AND winner1 is not null and winner1 <> '' order by end_date DESC limit 50;");
+		$r = $this->getWinners();
 		if (isset($r[0]))
 		{
 			$contests = [];
