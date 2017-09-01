@@ -24,11 +24,11 @@ class Concurso extends Service
                 $contest->end_date = substr($contest->end_date,0,strlen($contest->end_date)-3);
             }
 
-			$r = $this->getWinners();
+			$r1 = $this->getWinners();
 			
             $responseContent = [
                 "contests" => $r,
-				"winners" => isset($r[0])
+				"winners" => isset($r1[0])
             ];
 			
             $response = new Response();
