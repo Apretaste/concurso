@@ -31,4 +31,6 @@
 {/foreach}
 </table>
 {space5}
+{if $winners}
 <center>{button href="CONCURSO GANADORES" caption="Ganadores"}</center>
+{/if}
