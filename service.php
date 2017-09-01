@@ -71,12 +71,16 @@ class Concurso extends Service
             if ($winner3 !== false) $contest->winners[] = $winner3;
 
             $images = $this->getContestImages($contest->id);
-
+			
+			$imageList = [];
+			foreach ($images as $img)
+				$imageList = [$wwwroot."/public/contestsImages/$id/{$img['filename']}"];
+				
             $responseContent = ["contest" => $contest];
 
             $response = new Response();
             $response->setResponseSubject("Concurso");
-            $response->createFromTemplate("contest.tpl", $responseContent, $images);
+            $response->createFromTemplate("contest.tpl", $responseContent, $imageList);
             return $response;
         }
 
