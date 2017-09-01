@@ -39,6 +39,9 @@ class Concurso extends Service
 
     public function _ver(Request $request)
     {
+		$di = \Phalcon\DI\FactoryDefault::getDefault();
+        $wwwroot = $di->get('path')['root'];
+		
         $connection = new Connection();
 
         $id = intval(trim($request->query));
