@@ -24,12 +24,12 @@ class Concurso extends Service
 			$r1 = $this->getWinners();
 
 			$response = new Response();
-			$response->setCache("day");
+			$response->setCache(10080); // for a week
 			$response->setResponseSubject("Concursos");
 			$response->createFromTemplate("basic.tpl",[
-                "contests" => $r,
-                "winners" => isset($r1[0])
-            ]);
+				"contests" => $r,
+				"winners" => isset($r1[0])
+			]);
 
 			return $response;
 		}
@@ -72,8 +72,8 @@ class Concurso extends Service
 
 			$images = $this->getContestImages($contest->id);
 
-            $di = \Phalcon\DI\FactoryDefault::getDefault();
-            $wwwroot = $di->get('path')['root'];
+			$di = \Phalcon\DI\FactoryDefault::getDefault();
+			$wwwroot = $di->get('path')['root'];
 
 			$imageList = [];
 			foreach ($images as $img)
@@ -92,11 +92,11 @@ class Concurso extends Service
 	}
 
 	private function getWinners()
-    {
-        $connection = new Connection();
-        $r = $connection->query("SELECT * FROM _concurso WHERE end_date <= now() AND winner1 is not null and winner1 <> '' order by end_date DESC limit 50;");
-        return $r;
-    }
+	{
+		$connection = new Connection();
+		$r = $connection->query("SELECT * FROM _concurso WHERE end_date <= now() AND winner1 is not null and winner1 <> '' order by end_date DESC limit 50;");
+		return $r;
+	}
 
 	public function _ganadores(Request $request)
 	{
