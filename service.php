@@ -11,9 +11,10 @@ class Concurso extends Service
 	{
 		$connection = new Connection();
 		$r = $connection->query("SELECT * from _concurso WHERE end_date >= now()");
-
 		if (isset($r[0]))
+
 		{
+
 			foreach($r as $contest)
 			{
 				$contest->body = base64_decode($contest->body);
@@ -34,7 +35,10 @@ class Concurso extends Service
 			return $response;
 		}
 
-		return new Response();
+		$response = new Response();
+			$response->setResponseSubject("No hay concursos");
+			$response->createFromText("Temporalmente no tenemos concursos disponibles pero estamos trabajando en colocarlos.");
+			return $response;
 	}
 
 	public function _ver(Request $request)
