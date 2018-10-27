@@ -1,3 +1,4 @@
+
 <h1>{$contest->title}</h1>
 <p>
 	{if $contest->is_open === '0'}
@@ -42,8 +43,8 @@
 		{/if}
 	{/if}
 	<br/>
-	{$contest->body}
+	
 </p>
-
+<p>{$contest->body}</p>
 {space5}
 <center>{button href="CONCURSO" caption="Concursos"}</center>

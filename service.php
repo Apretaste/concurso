@@ -53,7 +53,7 @@ class Concurso extends Service
 		if (isset($r[0]))
 		{
 			$contest = $r[0];
-			$contest->body = base64_decode($contest->body);
+			$contest->body =$contest->body;
 			$contest->teaser = substr(strip_tags($contest->body),0,200);
 			$contest->end_date = substr($contest->end_date,0,strlen($contest->end_date)-3);
 
@@ -84,7 +84,6 @@ class Concurso extends Service
 				$imageList = [$wwwroot."/public/contestsImages/$id/{$img['filename']}"];
 
 			$responseContent = ["contest" => $contest];
-
 			$response = new Response();
 			$response->setCache();
 			$response->setResponseSubject("Concurso");
