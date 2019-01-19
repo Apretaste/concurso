@@ -1,0 +1,61 @@
+<div class="center-align"><h5><%=contest.title%></h5></div>
+<div class="col s12">
+	<%if(contest.is_open==true){%>
+	<b>Cierra el <%=contest.end_date%></b>
+	<%if(contest.prize1 != null || contest.prize2 != null || contest.prize3 != null){%>
+		<p>
+			<%if(contest.prize1 != null && contest.prize2 == null && contest.prize3 == null){%>
+			<b>Premio:</b><%=contest.prize1%>
+			<%}else{%>
+				<b>Premios: </b>
+				<%if(contest.prize1 != null){%>
+					<i class="tiny material-icons">looks_one</i><%=contest.prize1%>
+				<%}%>
+				<%if(contest.prize2 != null){%>
+					<i class="tiny material-icons">looks_two</i><%=contest.prize2%>
+				<%}%>
+				<%if(contest.prize3 != null){%>
+					<i class="tiny material-icons">looks_3</i><%=contest.prize3%>
+				<%}%>
+			<%}%>
+		</p>
+		<%}%>
+	<%}else{%>
+		<b>Este concurso cerro el <%=contest.end_date%></b><br>
+		<%if(contest.prize1 != null && contest.prize2 == null && contest.prize3 == null){%>
+			<b>Premio:</b><%=contest.prize1%><br>
+		<%}else{%>
+			<b>Premios: </b>
+			<%if(contest.prize1 != null){%>
+				<i class="tiny material-icons">looks_one</i><%=contest.prize1%>
+			<%}%>
+			<%if(contest.prize2 != null){%>
+				<i class="tiny material-icons">looks_two</i><%=contest.prize2%>
+			<%}%>
+			<%if(contest.prize3 != null){%>
+				<i class="tiny material-icons">looks_3</i><%=contest.prize3%>
+			<%}%>
+			<br>
+		<%}%>
+
+		<%if(contest.winner1 != null){%>
+			<%if(contest.winner1 != null && contest.winner2 == null && contest.winner3 == null){%>
+			<b>Ganador:</b><%=contest.winner1%>
+			<%}else{%>
+				<b>Ganadores: </b>
+				<%if(contest.winner1 != null){%>
+					<i class="tiny material-icons">looks_one</i><%=contest.winner1%>
+				<%}%>
+				<%if(contest.winner2 != null){%>
+					<i class="tiny material-icons">looks_two</i><%=contest.winner2%>
+				<%}%>
+				<%if(contest.winner3 != null){%>
+					<i class="tiny material-icons">looks_3</i><%=contest.winner3%>
+				<%}%>
+			<%}%>
+		<%}%>
+	<%}%>
+
+	<p><%-contest.body%></p>
+</div>
+<div class="center-align div5"><button class="btn green" onclick="apretaste.send({'command':'CONCURSO'});">Concursos</button></div>
