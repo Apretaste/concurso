@@ -1,61 +1,64 @@
-<div class="center-align"><h5><%=contest.title%></h5></div>
-<div class="col s12">
-	<%if(contest.is_open==true){%>
-	<b>Cierra el <%=contest.end_date%></b>
-	<%if(contest.prize1 != null || contest.prize2 != null || contest.prize3 != null){%>
-		<p>
-			<%if(contest.prize1 != null && contest.prize2 == null && contest.prize3 == null){%>
-			<b>Premio:</b><%=contest.prize1%>
-			<%}else{%>
-				<b>Premios: </b>
-				<%if(contest.prize1 != null){%>
-					<i class="tiny material-icons">looks_one</i><%=contest.prize1%>
-				<%}%>
-				<%if(contest.prize2 != null){%>
-					<i class="tiny material-icons">looks_two</i><%=contest.prize2%>
-				<%}%>
-				<%if(contest.prize3 != null){%>
-					<i class="tiny material-icons">looks_3</i><%=contest.prize3%>
-				<%}%>
-			<%}%>
-		</p>
-		<%}%>
-	<%}else{%>
-		<b>Este concurso cerro el <%=contest.end_date%></b><br>
-		<%if(contest.prize1 != null && contest.prize2 == null && contest.prize3 == null){%>
-			<b>Premio:</b><%=contest.prize1%><br>
-		<%}else{%>
-			<b>Premios: </b>
-			<%if(contest.prize1 != null){%>
-				<i class="tiny material-icons">looks_one</i><%=contest.prize1%>
-			<%}%>
-			<%if(contest.prize2 != null){%>
-				<i class="tiny material-icons">looks_two</i><%=contest.prize2%>
-			<%}%>
-			<%if(contest.prize3 != null){%>
-				<i class="tiny material-icons">looks_3</i><%=contest.prize3%>
-			<%}%>
-			<br>
-		<%}%>
+<div class="row">
+	<div class="col s12">
+		<h1><%= contest.title.firstUpper() %></h1>
+		<p>Cierra el <%= formatDateTime(contest.end_date) %></p>
 
-		<%if(contest.winner1 != null){%>
-			<%if(contest.winner1 != null && contest.winner2 == null && contest.winner3 == null){%>
-			<b>Ganador:</b><%=contest.winner1%>
-			<%}else{%>
-				<b>Ganadores: </b>
-				<%if(contest.winner1 != null){%>
-					<i class="tiny material-icons">looks_one</i><%=contest.winner1%>
-				<%}%>
-				<%if(contest.winner2 != null){%>
-					<i class="tiny material-icons">looks_two</i><%=contest.winner2%>
-				<%}%>
-				<%if(contest.winner3 != null){%>
-					<i class="tiny material-icons">looks_3</i><%=contest.winner3%>
-				<%}%>
-			<%}%>
-		<%}%>
-	<%}%>
+		<!-- PRICES AND WINNERS-->
+		<h2>Premios y ganadores</h2>
+		<ul class="collection">
+			<% if(contest.prize1) { %>
+			<li class="collection-item avatar">
+				<i class="material-icons circle">looks_one</i>
+				<span class="title">Primer premio</span>
+				<p>
+					<%= contest.prize1 %><br>
+					<% if(contest.winner1) { %>
+						<a href="#!" onclick="apretaste.send({'command':'PERFIL', data:{username:'<%= contest.winner1 %>'}})">@<%= contest.winner1 %></a>
+					<% } else { %>
+						Aún sin ganador
+					<% } %>
+				</p>
+			</li>
+			<% } %>
 
-	<p><%-contest.body%></p>
+			<% if(contest.prize2) { %>
+			<li class="collection-item avatar">
+				<i class="material-icons circle">looks_two</i>
+				<span class="title">Segundo premio</span>
+				<p>
+					<%= contest.prize2 %><br>
+					<% if(contest.winner2) { %>
+						<a href="#!" onclick="apretaste.send({'command':'PERFIL', data:{username:'<%= contest.winner2 %>'}})">@<%= contest.winner2 %></a>
+					<% } else { %>
+						Aún sin ganador
+					<% } %>
+				</p>
+			</li>
+			<% } %>
+
+			<% if(contest.prize3) { %>
+			<li class="collection-item avatar">
+				<i class="material-icons circle">looks_3</i>
+				<span class="title">Tercer premio</span>
+				<p>
+					<%= contest.prize3 %><br>
+					<% if(contest.winner3) { %>
+						<a href="#!" onclick="apretaste.send({'command':'PERFIL', data:{username:'<%= contest.winner3 %>'}})">@<%= contest.winner3 %></a>
+					<% } else { %>
+						Aún sin ganador
+					<% } %>
+				</p>
+			</li>
+			<% } %>
+		</ul>
+
+		<!-- BODY -->
+		<h2>Convocatoria</h2>
+		<p><%- contest.body %></p>
+	</div>
 </div>
-<div class="center-align div5"><button class="btn green" onclick="apretaste.send({'command':'CONCURSO'});">Concursos</button></div>
+
+<!-- GO BACK -->
+<div class="fixed-action-btn">
+	<a class="btn-floating btn-large waves-effect waves-light green" href="#!" onclick="apretaste.send({'command':'CONCURSO'})"><i class="material-icons">arrow_back</i></a>
+</div>
