@@ -2,7 +2,7 @@
 	<div class="col s12">
 		<h1>Ganadores</h1>
 
-		<% contests.forEach((contest) => { %>
+		<% contests.forEach(function(contest){ %>
 			<h2><%= contest.title.firstUpper() %></h2>
 			<p>Cerró el <%= formatDateTime(contest.end_date) %></p>
 
