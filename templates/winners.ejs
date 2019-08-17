@@ -1,41 +1,62 @@
-<div class = "center-align">
-	<h4>Ganadores</h4>
-	<table>
+<div class="row">
+	<div class="col s12">
+		<h1>Ganadores</h1>
+
 		<% for (var i = 0; i < contests.length; i++) { var contest = contests[i]; %>
-			<tr>
-				<td class = "center-align" colspan = "2">
-					<h6><b><%= contest.title %></b></h6>
-					<i><%= contest.end_date %></i>
-				</td>
-			</tr>
-			
-			<tr>
-				<td><b>Primer lugar</b></td>
-				<td><%= contest.winner1 %></td>
-			</tr>
-	
-			<% if(contest.winner2 != null) { %>
-				<tr>
-					<td><b>Segundo lugar</b></td>
-					<td><%= contest.winner2 %></td>
-				</tr>
-			<%}%>
-	
-			<% if(contest.winner3 != null) { %>
-				<tr>
-					<td><b>Tercer lugar</b></td>
-					<td><%= contest.winner3 %></td>
-				</tr>
-			<% } %>
+			<h2><%= contest.title.firstUpper() %></h2>
+			<p>Cerró el <%= formatDateTime(contest.end_date) %></p>
+
+			<ul class="collection">
+				<% if(contest.prize1) { %>
+					<li class="collection-item avatar">
+					<i class="material-icons circle">looks_one</i>
+					<span class="title">Primer premio</span>
+					<p>
+						<%= contest.prize1 %><br>
+						<% if(contest.winner1) { %>
+							<a href="#!" onclick="apretaste.send({'command':'PERFIL', data:{username:'<%= contest.winner1 %>'}})">@<%= contest.winner1 %></a>
+						<% } else { %>
+							Sin ganador
+						<% } %>
+					</p>
+				</li>
+				<% } %>
+
+				<% if(contest.prize2) { %>
+					<li class="collection-item avatar">
+					<i class="material-icons circle">looks_two</i>
+					<span class="title">Segundo premio</span>
+					<p>
+						<%= contest.prize2 %><br>
+						<% if(contest.winner2) { %>
+							<a href="#!" onclick="apretaste.send({'command':'PERFIL', data:{username:'<%= contest.winner2 %>'}})">@<%= contest.winner2 %></a>
+						<% } else { %>
+							Sin ganador
+						<% } %>
+					</p>
+				</li>
+				<% } %>
+
+				<% if(contest.prize3) { %>
+					<li class="collection-item avatar">
+					<i class="material-icons circle">looks_3</i>
+					<span class="title">Tercer premio</span>
+					<p>
+						<%= contest.prize3 %><br>
+						<% if(contest.winner3) { %>
+							<a href="#!" onclick="apretaste.send({'command':'PERFIL', data:{username:'<%= contest.winner3 %>'}})">@<%= contest.winner3 %></a>
+						<% } else { %>
+							Sin ganador
+						<% } %>
+					</p>
+				</li>
+				<% } %>
+			</ul>
 		<% } %>
-	</table>
+	</div>
 </div>
 
-<div class = "center-align div5">
-	<button class = "btn green" 
-			onclick = "apretaste.send({
-				command: 'CONCURSO'
-			});">
-		Concursos
-	</button>
+<!-- GO BACK -->
+<div class="fixed-action-btn">
+	<a class="btn-floating btn-large waves-effect waves-light green" href="#!" onclick="apretaste.send({'command':'CONCURSO'})"><i class="material-icons">arrow_back</i></a>
 </div>
