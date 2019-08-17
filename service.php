@@ -1,85 +1,119 @@
 <?php
+
 class Service
 {
-	/**
-	 * Function executed when the service is called
-	 *
-	 * @param Request $request
-	 * @return Response
-	 */
-	public function _main(Request $request, Response $response){
-		$contests = Connection::query("SELECT * from _concurso WHERE end_date >= now()");
 
-		if(empty($contests)){
-			$response->setTemplate('no-contests.ejs');
-			return;
-		}
+    /**
+     * Function executed when the service is called
+     *
+     * @param Request $request
+     *
+     * @return Response
+     * @throws \Exception
+     */
+    public function _main(Request $request, Response $response)
+    {
+        $contests = Connection::query('SELECT * from _concurso WHERE end_date >= now()');
 
-		foreach($contests as $contest){
-			unset($contest->body);
-			$contest->end_date = date_format((new DateTime($contest->end_date)),'d/m/Y - h:i a');
-		}
-		
-		$winner1 = Connection::query("SELECT * FROM _concurso WHERE end_date <= now() AND winner1 IS NOT NULL ORDER BY end_date DESC;");;
-		$response->setCache('day');
-		$response->setTemplate("basic.ejs",["contests" => $contests,"winners" => isset($winner1[0])]);
-	}
+        if (empty($contests)) {
+            $response->setTemplate('no-contests.ejs');
 
-	public function _ver(Request $request, Response $response){
-		$id = (isset($request->input->data->id))?$request->input->data->id:false;
+            return;
+        }
 
-		if(!$id){
-			$response->setTemplate('no-contests.ejs');
-			return;
-		}
+        foreach ($contests as $contest) {
+            unset($contest->body);
+            $contest->end_date = date_format((new DateTime($contest->end_date)), 'd/m/Y - h:i a');
+        }
 
-		$contest = Connection::query("SELECT *, (end_date >= now()) as is_open from _concurso WHERE id = $id");
+        $winner1 = Connection::query('SELECT * FROM _concurso WHERE end_date <= now() AND winner1 IS NOT NULL ORDER BY end_date DESC;');;
+        $response->setCache('day');
+        $response->setTemplate('basic.ejs', ['contests' => $contests, 'winners' => isset($winner1[0])]);
+    }
 
-		if(empty($contest)){
-			$response->setTemplate('no-contests.ejs');
-			return;
-		}
+    /**
+     * @param \Request  $request
+     * @param \Response $response
+     *
+     * @throws \Exception
+     */
+    public function _ver(Request $request, Response $response)
+    {
+        $id = $request->input->data->id ?? false;
 
-		$contest = $contest[0];
-		$contest->body = base64_decode($contest->body);
-		$contest->end_date = date_format((new DateTime($contest->end_date)),'d/m/Y - h:i a');
+        if (!$id) {
+            $response->setTemplate('no-contests.ejs');
 
-		$winner1 = Utils::getPerson($contest->winner1);
-		$winner2 = Utils::getPerson($contest->winner2);
-		$winner3 = Utils::getPerson($contest->winner3);
+            return;
+        }
 
-		if($winner1) $contest->winner1 = $winner1->username;
-		if($winner2) $contest->winner2 = $winner2->username;
-		if($winner3) $contest->winner3 = $winner3->username;
+        $contest = Connection::query("SELECT *, (end_date >= now()) as is_open from _concurso WHERE id = $id");
 
-		$response->setCache();
-		$response->setTemplate("contest.ejs", ["contest" => $contest]);
-	}
+        if (empty($contest)) {
+            $response->setTemplate('no-contests.ejs');
 
-	public function _ganadores(Request $request, Response $response){
-		$cts = Connection::query("SELECT * FROM _concurso WHERE end_date <= now() AND winner1 IS NOT NULL ORDER BY end_date DESC;");;
-		if(empty($cts)){
-			$response->setTemplate('no-winners.ejs');
-			return;
-		}
-		$contests = [];
+            return;
+        }
 
-		foreach ($cts as $contest){
-			unset($contest->body);
+        $contest = $contest[0];
+        $contest->body = base64_decode($contest->body);
+        $contest->end_date = date_format(new DateTime($contest->end_date), 'd/m/Y - h:i a');
 
-			$winner1 = Utils::getPerson($contest->winner1);
-			$winner2 = Utils::getPerson($contest->winner2);
-			$winner3 = Utils::getPerson($contest->winner3);
+        $winner1 = Utils::getPerson($contest->winner1);
+        $winner2 = Utils::getPerson($contest->winner2);
+        $winner3 = Utils::getPerson($contest->winner3);
 
-			if($winner1) $contest->winner1 = $winner1->username;
-			if($winner2) $contest->winner2 = $winner2->username;
-			if($winner3) $contest->winner3 = $winner3->username;
+        if ($winner1) {
+            $contest->winner1 = $winner1->username;
+        }
+        if ($winner2) {
+            $contest->winner2 = $winner2->username;
+        }
+        if ($winner3) {
+            $contest->winner3 = $winner3->username;
+        }
 
-			$contest->end_date = date_format((new DateTime($contest->end_date)),'d/m/Y - h:i a');
-			$contests[] = $contest;
-		}
+        $response->setCache();
+        $response->setTemplate('contest.ejs', ['contest' => $contest]);
+    }
 
-		$response->setTemplate('winners.ejs', ['contests' => $contests]);
-		return;
-	}
+    /**
+     * @param \Request  $request
+     * @param \Response $response
+     *
+     * @throws \Exception
+     */
+    public function _ganadores(Request $request, Response $response)
+    {
+        $cts = Connection::query('SELECT * FROM _concurso WHERE end_date <= now() AND winner1 IS NOT NULL ORDER BY end_date DESC;');;
+        if (empty($cts)) {
+            $response->setTemplate('no-winners.ejs');
+
+            return;
+        }
+        $contests = [];
+
+        foreach ($cts as $contest) {
+            unset($contest->body);
+
+            $winner1 = Utils::getPerson($contest->winner1);
+            $winner2 = Utils::getPerson($contest->winner2);
+            $winner3 = Utils::getPerson($contest->winner3);
+
+            if ($winner1) {
+                $contest->winner1 = $winner1->username;
+            }
+            if ($winner2) {
+                $contest->winner2 = $winner2->username;
+            }
+            if ($winner3) {
+                $contest->winner3 = $winner3->username;
+            }
+
+            $contest->end_date = date_format(new DateTime($contest->end_date), 'd/m/Y - h:i a');
+            $contests[] = $contest;
+        }
+
+        $response->setTemplate('winners.ejs', ['contests' => $contests]);
+    }
 }

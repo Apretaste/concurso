@@ -1,32 +1,41 @@
-<div class="center-align">
+<div class = "center-align">
 	<h4>Ganadores</h4>
 	<table>
-	<%contests.forEach((contest) => {%>
-		<tr>
-			<td class="center-align" colspan="2">
-				<h6><b><%=contest.title%></b></h6>
-				<i><%=contest.end_date%></i>
-			</td>
-		</tr>
-			<td><b>Primer lugar</b></td>
-			<td><%=contest.winner1%></td>
-		</tr>
-
-		<%if(contest.winner2!=null){%>
-		<tr>
-			<td><b>Segundo lugar</b></td>
-			<td><%=contest.winner2%></td>
-		</tr>
-		<%}%>
-
-		<%if(contest.winner3!=null){%>
-		<tr>
-			<td><b>Tercer lugar</b></td>
-			<td><%=contest.winner3%></td>
-		</tr>
-		<%}%>
-	<%});%>
+		<% for (var i = 0; i < contests.length; i++) { var contest = contests[i]; %>
+			<tr>
+				<td class = "center-align" colspan = "2">
+					<h6><b><%= contest.title %></b></h6>
+					<i><%= contest.end_date %></i>
+				</td>
+			</tr>
+			
+			<tr>
+				<td><b>Primer lugar</b></td>
+				<td><%= contest.winner1 %></td>
+			</tr>
+	
+			<% if(contest.winner2 != null) { %>
+				<tr>
+					<td><b>Segundo lugar</b></td>
+					<td><%= contest.winner2 %></td>
+				</tr>
+			<%}%>
+	
+			<% if(contest.winner3 != null) { %>
+				<tr>
+					<td><b>Tercer lugar</b></td>
+					<td><%= contest.winner3 %></td>
+				</tr>
+			<% } %>
+		<% } %>
 	</table>
 </div>
 
-<div class="center-align div5"><button class="btn green" onclick="apretaste.send({'command':'CONCURSO'});">Concursos</button></div>
+<div class = "center-align div5">
+	<button class = "btn green" 
+			onclick = "apretaste.send({
+				command: 'CONCURSO'
+			});">
+		Concursos
+	</button>
+</div>
