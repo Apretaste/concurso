@@ -1,3 +1,7 @@
+$(document).ready(function(){
+	$('.tabs').tabs();
+});
+
 // formats a date and time
 function formatDateTime(dateStr) {
 	var months = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
@@ -9,11 +13,3 @@ function formatDateTime(dateStr) {
 	var amOrPm = (date.getHours() < 12) ? "am" : "pm";
 	return day + ' de ' + months[month] + ' a las ' + hour + ':' + minutes + amOrPm;
 }
-
-//
-// PROTOTYPES
-//
-
-String.prototype.firstUpper = function() {
-	return this.charAt(0).toUpperCase() + this.substr(1).toLowerCase();
-};

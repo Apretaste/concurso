@@ -1,4 +1,5 @@
 <?php
+
 class Service
 {
 	/**
@@ -15,7 +16,8 @@ class Service
 			SELECT id, end_date, title, winner3, prize1, prize2, prize3 
 			FROM _concurso 
 			WHERE end_date >= NOW()
-			ORDER BY end_date ASC");
+			ORDER BY end_date ASC
+			LIMIT 10");
 
 		// message for empty contests
 		if (empty($contests)) {

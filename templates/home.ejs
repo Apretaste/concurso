@@ -1,37 +1,34 @@
 <div class="row">
 	<div class="col s12">
-		<h1>Concursos</h1>
+		<ul class="tabs tabs-fixed-width">
+			<li class="tab"><a href="#" class="active">Concursos</a></li>
+			<li class="tab"><a href="#" onclick="apretaste.send({command: 'CONCURSO GANADORES'})">Ganadores</a></li> 
+		</ul>
 	</div>
 </div>
 
 <div class="row">
 	<% for (var i =0; i < contests.length; i++) { var contest = contests[i]; %>
 	<div class="col s12 m6 l4">
-		<div class="card blue-grey darken-1">
-			<div class="card-content white-text">
-				<span class="card-title"><%= contest.title.firstUpper() %></span>
-				<span class="lime-text">
-					<% if(contest.prize1) { %>
-						<i class="tiny material-icons">looks_one</i> <%= contest.prize1 %>
-					<% } %>
-					<% if(contest.prize2) { %>
-						<i class="tiny material-icons left-space">looks_two</i><%= contest.prize2 %>
-					<%  }%>
-					<% if(contest.prize3) { %>
-						<i class="tiny material-icons left-space">looks_3</i><%= contest.prize3 %>
-					<% } %>
-				</span>
+		<div class="card">
+			<div class="card-content">
+				<span class="card-title"><%= contest.title %></span>
 				<p>Cierra el <%= formatDateTime(contest.end_date) %></p>
+
+				<% if(contest.prize1) { %>
+					<p><i class="tiny material-icons space-top">looks_one</i> <%= contest.prize1 %></p>
+				<% } %>
+				<% if(contest.prize2) { %>
+					<p><i class="tiny material-icons">looks_two</i> <%= contest.prize2 %></p>
+				<%  } %>
+				<% if(contest.prize3) { %>
+					<p><i class="tiny material-icons">looks_3</i> <%= contest.prize3 %></p>
+				<% } %>
 			</div>
-			<div class="card-action">
-				<a href="#!" onclick="apretaste.send({'command':'CONCURSO VER','data':{'id':'<%= contest.id %>'}})">Ver más</a>
+			<div class="card-action grey lighten-4">
+				<a class="green-text" href="#!" onclick="apretaste.send({'command':'CONCURSO VER','data':{'id':'<%= contest.id %>'}})">Ver más</a>
 			</div>
 		</div>
 	</div>
 	<% } %>
-</div>
-
-<!-- LIST OF WINNERS -->
-<div class="fixed-action-btn">
-	<a class="btn-floating btn-large waves-effect waves-light green" href="#!" onclick="apretaste.send({'command':'CONCURSO GANADORES'})"><i class="material-icons">local_play</i></a>
 </div>
