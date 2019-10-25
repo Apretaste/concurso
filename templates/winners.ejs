@@ -37,12 +37,12 @@
                             <% } %>
                         </ul>
                     </div>
-                    <div class="card-content grey lighten-4">
+                    <div class="card-content grey lighten-4" style="padding: 12px;">
                         <% if(contest.prize1) { %>
                             <div id="tab1<%= uik %>">
                                 <% if(contest.winner1) { %>
                                     <ul class="collection" style="margin: 0; border: none;">
-                                        <li class="collection-item avatar"
+                                        <li class="collection-item avatar grey lighten-4"
                                             style="min-height: auto;padding-top: 0;padding-bottom: 0;">
                                             <div class="circle"
                                                  style="<%= getAvatar(contest.winner1avatar, "{{APP_SERVICE_PATH}}/images", 42) %> background-color: <%= colors[contest.winner1aColor] %>;">
@@ -63,7 +63,7 @@
                             <div id="tab2<%= uik %>">
                                 <% if(contest.winner2) { %>
                                     <ul class="collection" style="margin: 0; border: none;">
-                                        <li class="collection-item avatar"
+                                        <li class="collection-item avatar grey lighten-4"
                                             style="min-height: auto;padding-top: 0;padding-bottom: 0;">
                                             <div class="circle"
                                                  style="<%= getAvatar(contest.winner2avatar, "{{APP_SERVICE_PATH}}/images", 42) %> background-color: <%= colors[contest.winner2aColor] %>;">
@@ -84,7 +84,7 @@
                             <div id="tab3<%= uik %>">
                                 <% if(contest.winner3) { %>
                                     <ul class="collection" style="margin: 0; border: none;">
-                                        <li class="collection-item avatar"
+                                        <li class="collection-item avatar grey lighten-4"
                                             style="min-height: auto;padding-top: 0;padding-bottom: 0;">
                                             <div class="circle"
                                                  style="<%= getAvatar(contest.winner3avatar, "{{APP_SERVICE_PATH}}/images", 42) %> background-color: <%= colors[contest.winner3aColor] %>;">
