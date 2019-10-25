@@ -98,8 +98,14 @@ class Service
 			SELECT 
 				end_date, title, prize1, prize2, prize3,
 				(SELECT username FROM person WHERE email = winner1) AS winner1,
+				(SELECT avatar FROM person WHERE email = winner1) AS winner1avatar,
+				(SELECT avatarcolor FROM person WHERE email = winner1) AS winner1aColor,
 				(SELECT username FROM person WHERE email = winner2) AS winner2,
-				(SELECT username FROM person WHERE email = winner3) AS winner3
+				(SELECT avatar FROM person WHERE email = winner2) AS winner2avatar,
+				(SELECT avatarColor FROM person WHERE email = winner2) AS winner2aColor,
+				(SELECT username FROM person WHERE email = winner3) AS winner3,
+				(SELECT avatar FROM person WHERE email = winner3) AS winner3avatar,
+				(SELECT avatarcolor FROM person WHERE email = winner3) AS winner3aColor
 			FROM _concurso
 			WHERE end_date <= NOW() 
 			AND winner1 IS NOT NULL 
