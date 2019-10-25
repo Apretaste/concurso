@@ -49,7 +49,8 @@
                                             </div>
 
                                             <span class="title"><a
-                                                        onclick="apretaste.send({'command':'PERFIL','data':{'username':'<%= contest.winner1.username %>'}})">@<%= contest.winner1.username %></a></span>
+                                                        onclick="apretaste.send({'command':'PERFIL','data':{'username':'<%= contest.winner1 %>'}})">@<%= contest.winner1 %></a></span>
+                                            <p><%= contest.prize1 %></p>
                                         </li>
                                     </ul>
                                 <% } else { %>
@@ -69,7 +70,8 @@
                                             </div>
 
                                             <span class="title"><a
-                                                        onclick="apretaste.send({'command':'PERFIL','data':{'username':'<%= contest.winner2.username %>'}})">@<%= contest.winner2.username %></a></span>
+                                                        onclick="apretaste.send({'command':'PERFIL','data':{'username':'<%= contest.winner2 %>'}})">@<%= contest.winner2 %></a></span>
+                                            <p><%= contest.prize2 %></p>
                                         </li>
                                     </ul>
                                 <% } else { %>
@@ -89,7 +91,8 @@
                                             </div>
 
                                             <span class="title"><a
-                                                        onclick="apretaste.send({'command':'PERFIL','data':{'username':'<%= contest.winner3.username %>'}})">@<%= contest.winner3.username %></a></span>
+                                                        onclick="apretaste.send({'command':'PERFIL','data':{'username':'<%= contest.winner3 %>'}})">@<%= contest.winner3 %></a></span>
+                                            <p><%= contest.prize3 %></p>
                                         </li>
                                     </ul>
                                 <% } else { %>
