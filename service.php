@@ -5,9 +5,12 @@ class Service
 	/**
 	 * List of contests
 	 *
-	 * @author salvipascual
-	 * @param Request $request
+	 * @param Request  $request
 	 * @param Response $response
+	 *
+	 * @return \Response
+	 * @throws \Exception
+	 * @author salvipascual
 	 */
 	public function _main(Request $request, Response $response)
 	{
@@ -31,6 +34,8 @@ class Service
 		// send data to the view
 		$response->setCache('day');
 		$response->setTemplate("home.ejs", ["contests" => $contests]);
+
+		Challenges::complete("view-current-contests", $request->person->id);
 	}
 
 	/**
