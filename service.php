@@ -1,5 +1,10 @@
 <?php
 
+use Apretaste\Request;
+use Apretaste\Response;
+use Framework\Database;
+use Apretaste\Challenges;
+
 class Service
 {
 	/**
@@ -8,14 +13,13 @@ class Service
 	 * @param Request  $request
 	 * @param Response $response
 	 *
-	 * @return \Response
 	 * @throws \Exception
 	 * @author salvipascual
 	 */
-	public function _main(Request $request, Response $response)
+	public function _main(Request $request, Response &$response)
 	{
 		// get the list of contests
-		$contests = Connection::query("
+		$contests = Database::query("
 			SELECT id, end_date, title, prize1, prize2, prize3 
 			FROM _concurso 
 			WHERE end_date >= NOW()
@@ -24,11 +28,12 @@ class Service
 
 		// message for empty contests
 		if (empty($contests)) {
-			return $response->setTemplate('message.ejs', [
+			$response->setTemplate('message.ejs', [
 				"header"=>"No hay concursos",
 				"icon"=>"sentiment_very_dissatisfied",
 				"text" => "Lo sentimos, pero de momento no tenemos concursos disponibles. Estamos en búsqueda de nuevos concursos, por favor revise en unos días."
 			]);
+			return;
 		}
 
 		// send data to the view
@@ -41,25 +46,29 @@ class Service
 	/**
 	 * Check a contest
 	 *
-	 * @author salvipascual
-	 * @param Request $request
+	 * @param Request  $request
 	 * @param Response $response
+	 *
+	 * @return void
+	 * @throws \Framework\Alert
+	 * @author salvipascual
 	 */
-	public function _ver(Request $request, Response $response)
+	public function _ver(Request $request, Response &$response)
 	{
 		// get the contest id
 		$id = isset($request->input->data->id) ? $request->input->data->id : "";
 
 		// get the contest
-		$contest = Connection::query("SELECT * FROM _concurso WHERE id = $id");
+		$contest = Database::query("SELECT * FROM _concurso WHERE id = $id");
 
 		// message for empty contests
 		if (empty($contest)) {
-			return $response->setTemplate('message.ejs', [
+			$response->setTemplate('message.ejs', [
 				"header"=>"Concurso no encontrado",
 				"icon"=>"sentiment_very_dissatisfied",
 				"text" => "Lo sentimos, pero de momento este concurso no está disponible. Estamos en búsqueda de nuevos concursos, por favor revise en unos días."
 			]);
+			return;
 		}
 
 		// get the body
@@ -68,19 +77,19 @@ class Service
 
 		// get the winner 1 if exist
 		if($contest->winner1) {
-			$w = Connection::query("SELECT username FROM person WHERE email = '{$contest->winner1}'");
+			$w = Database::query("SELECT username FROM person WHERE email = '{$contest->winner1}'");
 			$contest->winner1 = empty($w) ? "" : $w[0]->username;
 		}
 
 		// get the winner 2 if exist
 		if($contest->winner2) {
-			$w = Connection::query("SELECT username FROM person WHERE email = '{$contest->winner2}'");
+			$w = Database::query("SELECT username FROM person WHERE email = '{$contest->winner2}'");
 			$contest->winner2 = empty($w) ? "" : $w[0]->username;
 		}
 
 		// get the winner 1 if exist
 		if($contest->winner3) {
-			$w = Connection::query("SELECT username FROM person WHERE email = '{$contest->winner3}'");
+			$w = Database::query("SELECT username FROM person WHERE email = '{$contest->winner3}'");
 			$contest->winner3 = empty($w) ? "" : $w[0]->username;
 		}
 
@@ -92,14 +101,17 @@ class Service
 	/**
 	 * Check winners for a contest
 	 *
-	 * @author salvipascual
-	 * @param Request $request
+	 * @param Request  $request
 	 * @param Response $response
+	 *
+	 * @return void
+	 * @throws \Framework\Alert
+	 * @author salvipascual
 	 */
-	public function _ganadores(Request $request, Response $response)
+	public function _ganadores(Request $request, Response &$response)
 	{
 		// get the winners list
-		$contests = Connection::query("
+		$contests = Database::query("
 			SELECT 
 				end_date, title, prize1, prize2, prize3,
 				(SELECT username FROM person WHERE email = winner1) AS winner1,
@@ -119,11 +131,12 @@ class Service
 
 		// message for empty winners
 		if(empty($contests)) {
-			return $response->setTemplate('message.ejs', [
+			 $response->setTemplate('message.ejs', [
 				"header"=>"No hay concursos",
 				"icon"=>"sentiment_very_dissatisfied",
 				"text" => "No tenemos los resultados de ningún concurso de momento. Si un concurso terminó y los resultados aún no aparecen, por favor comuníquese con el soporte."
 			]);
+			return;
 		}
 
 		// send data to the view
