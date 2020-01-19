@@ -10,7 +10,7 @@ class Service
 	/**
 	 * List of contests
 	 *
-	 * @param Request  $request
+	 * @param Request $request
 	 * @param Response $response
 	 *
 	 * @throws \Exception
@@ -29,8 +29,8 @@ class Service
 		// message for empty contests
 		if (empty($contests)) {
 			$response->setTemplate('message.ejs', [
-				"header"=>"No hay concursos",
-				"icon"=>"sentiment_very_dissatisfied",
+				"header" => "No hay concursos",
+				"icon" => "sentiment_very_dissatisfied",
 				"text" => "Lo sentimos, pero de momento no tenemos concursos disponibles. Estamos en búsqueda de nuevos concursos, por favor revise en unos días."
 			]);
 			return;
@@ -46,7 +46,7 @@ class Service
 	/**
 	 * Check a contest
 	 *
-	 * @param Request  $request
+	 * @param Request $request
 	 * @param Response $response
 	 *
 	 * @return void
@@ -64,8 +64,8 @@ class Service
 		// message for empty contests
 		if (empty($contest)) {
 			$response->setTemplate('message.ejs', [
-				"header"=>"Concurso no encontrado",
-				"icon"=>"sentiment_very_dissatisfied",
+				"header" => "Concurso no encontrado",
+				"icon" => "sentiment_very_dissatisfied",
 				"text" => "Lo sentimos, pero de momento este concurso no está disponible. Estamos en búsqueda de nuevos concursos, por favor revise en unos días."
 			]);
 			return;
@@ -76,19 +76,19 @@ class Service
 		$contest->body = base64_decode($contest->body);
 
 		// get the winner 1 if exist
-		if($contest->winner1) {
+		if ($contest->winner1) {
 			$w = Database::query("SELECT username FROM person WHERE email = '{$contest->winner1}'");
 			$contest->winner1 = empty($w) ? "" : $w[0]->username;
 		}
 
 		// get the winner 2 if exist
-		if($contest->winner2) {
+		if ($contest->winner2) {
 			$w = Database::query("SELECT username FROM person WHERE email = '{$contest->winner2}'");
 			$contest->winner2 = empty($w) ? "" : $w[0]->username;
 		}
 
 		// get the winner 1 if exist
-		if($contest->winner3) {
+		if ($contest->winner3) {
 			$w = Database::query("SELECT username FROM person WHERE email = '{$contest->winner3}'");
 			$contest->winner3 = empty($w) ? "" : $w[0]->username;
 		}
@@ -101,7 +101,7 @@ class Service
 	/**
 	 * Check winners for a contest
 	 *
-	 * @param Request  $request
+	 * @param Request $request
 	 * @param Response $response
 	 *
 	 * @return void
@@ -130,10 +130,10 @@ class Service
 			LIMIT 10");
 
 		// message for empty winners
-		if(empty($contests)) {
-			 $response->setTemplate('message.ejs', [
-				"header"=>"No hay concursos",
-				"icon"=>"sentiment_very_dissatisfied",
+		if (empty($contests)) {
+			$response->setTemplate('message.ejs', [
+				"header" => "No hay concursos",
+				"icon" => "sentiment_very_dissatisfied",
 				"text" => "No tenemos los resultados de ningún concurso de momento. Si un concurso terminó y los resultados aún no aparecen, por favor comuníquese con el soporte."
 			]);
 			return;
