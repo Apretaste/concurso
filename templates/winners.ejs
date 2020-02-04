@@ -44,12 +44,8 @@
                                     <ul class="collection" style="margin: 0; border: none;">
                                         <li class="collection-item avatar grey lighten-4"
                                             style="min-height: auto;padding-top: 0;padding-bottom: 0;">
-                                            <div class="circle"
-                                                 style="<%= getAvatar(contest.winner1avatar, "{{APP_SERVICE_PATH}}/images", 42) %> background-color: <%= colors[contest.winner1aColor] %>;">
-                                            </div>
-
-                                            <span class="title"><a
-                                                        onclick="apretaste.send({'command':'PERFIL','data':{'username':'<%= contest.winner1 %>'}})">@<%= contest.winner1 %></a></span>
+                                            <div class="person-avatar circle" face="<%= contest.winner1avatar %>" color="<%= colors[contest.winner1aColor] %>" size="42"></div>
+                                            <span class="title"><a onclick="apretaste.send({'command':'PERFIL','data':{'username':'<%= contest.winner1 %>'}})">@<%= contest.winner1 %></a></span>
                                             <p><%= contest.prize1 %></p>
                                         </li>
                                     </ul>
@@ -65,12 +61,8 @@
                                     <ul class="collection" style="margin: 0; border: none;">
                                         <li class="collection-item avatar grey lighten-4"
                                             style="min-height: auto;padding-top: 0;padding-bottom: 0;">
-                                            <div class="circle"
-                                                 style="<%= getAvatar(contest.winner2avatar, "{{APP_SERVICE_PATH}}/images", 42) %> background-color: <%= colors[contest.winner2aColor] %>;">
-                                            </div>
-
-                                            <span class="title"><a
-                                                        onclick="apretaste.send({'command':'PERFIL','data':{'username':'<%= contest.winner2 %>'}})">@<%= contest.winner2 %></a></span>
+                                            <div class="person-avatar circle" face="<%= contest.winner2avatar %>" color="<%= colors[contest.winner2aColor] %>" size="42"></div>
+                                            <span class="title"><a onclick="apretaste.send({'command':'PERFIL','data':{'username':'<%= contest.winner2 %>'}})">@<%= contest.winner2 %></a></span>
                                             <p><%= contest.prize2 %></p>
                                         </li>
                                     </ul>
@@ -86,12 +78,8 @@
                                     <ul class="collection" style="margin: 0; border: none;">
                                         <li class="collection-item avatar grey lighten-4"
                                             style="min-height: auto;padding-top: 0;padding-bottom: 0;">
-                                            <div class="circle"
-                                                 style="<%= getAvatar(contest.winner3avatar, "{{APP_SERVICE_PATH}}/images", 42) %> background-color: <%= colors[contest.winner3aColor] %>;">
-                                            </div>
-
-                                            <span class="title"><a
-                                                        onclick="apretaste.send({'command':'PERFIL','data':{'username':'<%= contest.winner3 %>'}})">@<%= contest.winner3 %></a></span>
+                                            <div class="person-avatar circle" face="<%= contest.winner3avatar %>" color="<%= colors[contest.winner3aColor] %>" size="42"></div>
+                                            <span class="title"><a onclick="apretaste.send({'command':'PERFIL','data':{'username':'<%= contest.winner3 %>'}})">@<%= contest.winner3 %></a></span>
                                             <p><%= contest.prize3 %></p>
                                         </li>
                                     </ul>
