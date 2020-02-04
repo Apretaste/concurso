@@ -12,8 +12,6 @@ class Service
 	 *
 	 * @param Request $request
 	 * @param Response $response
-	 *
-	 * @throws \Exception
 	 * @author salvipascual
 	 */
 	public function _main(Request $request, Response &$response)
@@ -28,12 +26,11 @@ class Service
 
 		// message for empty contests
 		if (empty($contests)) {
-			$response->setTemplate('message.ejs', [
+			return $response->setTemplate('message.ejs', [
 				"header" => "No hay concursos",
 				"icon" => "sentiment_very_dissatisfied",
 				"text" => "Lo sentimos, pero de momento no tenemos concursos disponibles. Estamos en búsqueda de nuevos concursos, por favor revise en unos días."
 			]);
-			return;
 		}
 
 		// send data to the view
@@ -48,9 +45,6 @@ class Service
 	 *
 	 * @param Request $request
 	 * @param Response $response
-	 *
-	 * @return void
-	 * @throws \Framework\Alert
 	 * @author salvipascual
 	 */
 	public function _ver(Request $request, Response &$response)
@@ -63,12 +57,11 @@ class Service
 
 		// message for empty contests
 		if (empty($contest)) {
-			$response->setTemplate('message.ejs', [
+			return $response->setTemplate('message.ejs', [
 				"header" => "Concurso no encontrado",
 				"icon" => "sentiment_very_dissatisfied",
 				"text" => "Lo sentimos, pero de momento este concurso no está disponible. Estamos en búsqueda de nuevos concursos, por favor revise en unos días."
 			]);
-			return;
 		}
 
 		// get the body
@@ -103,9 +96,6 @@ class Service
 	 *
 	 * @param Request $request
 	 * @param Response $response
-	 *
-	 * @return void
-	 * @throws \Framework\Alert
 	 * @author salvipascual
 	 */
 	public function _ganadores(Request $request, Response &$response)
@@ -125,18 +115,17 @@ class Service
 				(SELECT avatarcolor FROM person WHERE email = winner3) AS winner3aColor
 			FROM _concurso
 			WHERE end_date <= NOW() 
-			AND winner1 IS NOT NULL 
+			AND (winner1 IS NOT NULL || winner1 <> '') 
 			ORDER BY end_date DESC
 			LIMIT 10");
 
 		// message for empty winners
 		if (empty($contests)) {
-			$response->setTemplate('message.ejs', [
+			return $response->setTemplate('message.ejs', [
 				"header" => "No hay concursos",
 				"icon" => "sentiment_very_dissatisfied",
 				"text" => "No tenemos los resultados de ningún concurso de momento. Si un concurso terminó y los resultados aún no aparecen, por favor comuníquese con el soporte."
 			]);
-			return;
 		}
 
 		// send data to the view
