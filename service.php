@@ -10,10 +10,10 @@ class Service
 	/**
 	 * List of contests
 	 *
-	 * @param Request $request
+	 * @param Request  $request
 	 * @param Response $response
 	 *
-	 * @throws \Exception
+	 * @throws \Framework\Alert
 	 * @author salvipascual
 	 */
 	public function _main(Request $request, Response &$response)
@@ -74,10 +74,9 @@ class Service
 	/**
 	 * Check a contest
 	 *
-	 * @param Request $request
+	 * @param Request  $request
 	 * @param Response $response
 	 *
-	 * @return void
 	 * @throws \Framework\Alert
 	 * @author salvipascual
 	 */
@@ -96,7 +95,6 @@ class Service
 				'icon' => 'sentiment_very_dissatisfied',
 				'text' => 'Lo sentimos, pero de momento este concurso no está disponible. Estamos en búsqueda de nuevos concursos, por favor revise en unos días.'
 			]);
-			return;
 		}
 
 		// get the body
@@ -110,17 +108,16 @@ class Service
 	/**
 	 * Check winners for a contest
 	 *
-	 * @param Request $request
+	 * @param Request  $request
 	 * @param Response $response
 	 *
-	 * @return void
 	 * @throws \Framework\Alert
 	 * @author salvipascual
 	 */
 	public function _ganadores(Request $request, Response &$response)
 	{
 		// get the winners list
-		$contests = Database::query('
+		$contests = Database::query("
 			SELECT 
 				end_date, title, prize1, prize2, prize3,
 				(SELECT username FROM person WHERE email = winner1) AS winner1,
@@ -134,9 +131,9 @@ class Service
 				(SELECT avatarcolor FROM person WHERE email = winner3) AS winner3aColor
 			FROM _concurso
 			WHERE end_date <= NOW() 
-			AND winner1 IS NOT NULL 
+			AND (winner1 IS NOT NULL || winner1 <> '') 
 			ORDER BY end_date DESC
-			LIMIT 10');
+			LIMIT 10");
 
 		// message for empty winners
 		if (empty($contests)) {
