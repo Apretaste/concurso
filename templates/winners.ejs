@@ -44,7 +44,8 @@
                                     <ul class="collection" style="margin: 0; border: none;">
                                         <li class="collection-item avatar grey lighten-4"
                                             style="min-height: auto;padding-top: 0;padding-bottom: 0;">
-                                            <div class="circle" style="<%= getAvatar(contest.winner1avatar, "{{APP_SERVICE_PATH}}/images", 42) %> background-color: <%= colors[contest.winner1aColor] %>;">
+                                            <div class="circle"
+                                                 style="<%= getAvatar(contest.winner1avatar, "{{APP_SERVICE_PATH}}/images") %> background-color: <%= colors[contest.winner1aColor] %>;">
                                             </div>
 
                                             <span class="title"><a onclick="apretaste.send({'command':'PERFIL','data':{'username':'<%= contest.winner1 %>'}})">@<%= contest.winner1 %></a></span>
@@ -64,7 +65,7 @@
                                         <li class="collection-item avatar grey lighten-4"
                                             style="min-height: auto;padding-top: 0;padding-bottom: 0;">
                                             <div class="circle"
-                                                 style="<%= getAvatar(contest.winner2avatar, "{{APP_SERVICE_PATH}}/images", 42) %> background-color: <%= colors[contest.winner2aColor] %>;">
+                                                 style="<%= getAvatar(contest.winner2avatar, "{{APP_SERVICE_PATH}}/images") %> background-color: <%= colors[contest.winner2aColor] %>;">
                                             </div>
 
                                             <span class="title"><a
@@ -85,7 +86,7 @@
                                         <li class="collection-item avatar grey lighten-4"
                                             style="min-height: auto;padding-top: 0;padding-bottom: 0;">
                                             <div class="circle"
-                                                 style="<%= getAvatar(contest.winner3avatar, "{{APP_SERVICE_PATH}}/images", 42) %> background-color: <%= colors[contest.winner3aColor] %>;">
+                                                 style="<%= getAvatar(contest.winner3avatar, "{{APP_SERVICE_PATH}}/images") %> background-color: <%= colors[contest.winner3aColor] %>;">
                                             </div>
 
                                             <span class="title"><a

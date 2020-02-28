@@ -5,7 +5,7 @@ class Service
 	/**
 	 * List of contests
 	 *
-	 * @param Request  $request
+	 * @param Request $request
 	 * @param Response $response
 	 *
 	 * @return \Response
@@ -131,7 +131,7 @@ class Service
 			LIMIT 10');
 
 		// message for empty winners
-		if(empty($contests)) {
+		if (empty($contests)) {
 			return $response->setTemplate('message.ejs', [
 					'header' => 'No hay concursos',
 					'icon'   => 'sentiment_very_dissatisfied',
@@ -139,8 +139,20 @@ class Service
 			]);
 		}
 
+		$images = [];
+		$pathToService = Utils::getPathToService($response->serviceName);
+		foreach ($contests as $contest) {
+			if (empty($contest->winner1avatar)) $contest->winner1avatar = "hombre";
+			if (empty($contest->winner2avatar)) $contest->winner2avatar = "hombre";
+			if (empty($contest->winner3avatar)) $contest->winner3avatar = "hombre";
+
+			$images[] = "$pathToService/images/{$contest->winner1avatar}.png";
+			$images[] = "$pathToService/images/{$contest->winner2avatar}.png";
+			$images[] = "$pathToService/images/{$contest->winner3avatar}.png";
+		}
+
 		// send data to the view
 		$response->setCache('week');
-		$response->setTemplate('winners.ejs', ['contests' => $contests]);
+		$response->setTemplate('winners.ejs', ['contests' => $contests], $images);
 	}
 }

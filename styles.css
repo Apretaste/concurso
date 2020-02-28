@@ -5,3 +5,7 @@
 .space-top {
 	margin-top: 10px;
 }
+
+.avatar .circle{
+	background-size: contain;
+}
