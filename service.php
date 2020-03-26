@@ -10,7 +10,7 @@ class Service
 	/**
 	 * List of contests
 	 *
-	 * @param Request  $request
+	 * @param Request $request
 	 * @param Response $response
 	 *
 	 * @throws \Framework\Alert
@@ -51,8 +51,8 @@ class Service
 	 * @return mixed|null
 	 * @throws \Framework\Alert
 	 */
-	public static function getContest($id) {
-
+	public static function getContest($id)
+	{
 		$contest = Database::query("
 			SELECT *,
        			(SELECT username FROM person WHERE person.id = _concurso.winner_1) as username1,
@@ -74,7 +74,7 @@ class Service
 	/**
 	 * Check a contest
 	 *
-	 * @param Request  $request
+	 * @param Request $request
 	 * @param Response $response
 	 *
 	 * @throws \Framework\Alert
@@ -108,7 +108,7 @@ class Service
 	/**
 	 * Check winners for a contest
 	 *
-	 * @param Request  $request
+	 * @param Request $request
 	 * @param Response $response
 	 *
 	 * @throws \Framework\Alert
@@ -116,6 +116,11 @@ class Service
 	 */
 	public function _ganadores(Request $request, Response &$response)
 	{
+		for ($i = 1; $i < 4; $i++) {
+			Database::query("UPDATE _concurso SET winner{$i} = (SELECT email FROM person WHERE person.id = winner_{$i}) WHERE winner{$i} is null");
+			Database::query("UPDATE _concurso SET winner_{$i} = (SELECT id FROM person WHERE person.email = winner{$i}) WHERE winner_{$i} is null");
+		}
+
 		// get the winners list
 		$contests = Database::query("
 			SELECT 
