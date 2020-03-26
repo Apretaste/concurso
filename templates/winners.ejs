@@ -11,9 +11,9 @@
 	<div class="col s12">
 		<% for(var i=0; i < contests.length; i++) { %>
             <% var contest = contests[i]; %>
-            <% if (contest.winner1avatar == '') contest.winner1avatar = 'apretin'; %>
-            <% if (contest.winner2avatar == '') contest.winner2avatar = 'apretin'; %>
-            <% if (contest.winner3avatar == '') contest.winner3avatar = 'apretin'; %>
+            <% if (contest.winner1avatar == '' || contest.winner1avatar == null) contest.winner1avatar = 'apretin'; %>
+            <% if (contest.winner2avatar == '' || contest.winner2avatar == null) contest.winner2avatar = 'apretin'; %>
+            <% if (contest.winner3avatar == '' || contest.winner3avatar == null) contest.winner3avatar = 'apretin'; %>
 			<% var uik = btoa(contest.title).substring(0, 5) + Math.floor(Math.random() * 1000); %>
 			<div class="card">
 				<div class="card-content">
