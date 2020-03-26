@@ -117,6 +117,8 @@ class Service
 	public function _ganadores(Request $request, Response &$response)
 	{
 		for ($i = 1; $i < 4; $i++) {
+			Database::query("UPDATE _concurso SET winner{$i} = null WHERE winner{$i} = ''");
+			Database::query("UPDATE _concurso SET winner_{$i} = null WHERE winner_{$i} = 250378");
 			Database::query("UPDATE _concurso SET winner{$i} = (SELECT email FROM person WHERE person.id = winner_{$i}) WHERE winner{$i} is null");
 			Database::query("UPDATE _concurso SET winner_{$i} = (SELECT id FROM person WHERE person.email = winner{$i}) WHERE winner_{$i} is null");
 		}
