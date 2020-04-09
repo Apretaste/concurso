@@ -47,9 +47,7 @@ class Service
 	 * Get contest by id
 	 *
 	 * @param $id
-	 *
 	 * @return mixed|null
-	 * @throws \Framework\Alert
 	 */
 	public static function getContest($id)
 	{
@@ -76,8 +74,6 @@ class Service
 	 *
 	 * @param Request $request
 	 * @param Response $response
-	 *
-	 * @throws \Framework\Alert
 	 * @author salvipascual
 	 */
 	public function _ver(Request $request, Response &$response)
@@ -110,8 +106,6 @@ class Service
 	 *
 	 * @param Request $request
 	 * @param Response $response
-	 *
-	 * @throws \Framework\Alert
 	 * @author salvipascual
 	 */
 	public function _ganadores(Request $request, Response &$response)

@@ -18,7 +18,7 @@
 			<div class="card">
 				<div class="card-content">
 					<span class="card-title"><%= contest.title %></span>
-					<p>Cerró el <%= formatDateTime(contest.end_date) %></p>
+					<p>Cerró el <%= moment(contest.end_date).format("D [de] MMMM [a las] h:mm a") %></p>
 				</div>
 				<% if(contest.prize1 || contest.prize2 || contest.prize3) { %>
 					<div class="card-tabs">

@@ -13,7 +13,7 @@
 		<div class="card">
 			<div class="card-content">
 				<span class="card-title"><%= contest.title %></span>
-				<p>Cierra el <%= formatDateTime(contest.end_date) %></p>
+				<p>Cierra el <%= moment(contest.end_date).format("D [de] MMMM [a las] h:mm a") %></p>
 
 				<% if(contest.prize1) { %>
 					<p><i class="tiny material-icons space-top">looks_one</i> <%= contest.prize1 %></p>

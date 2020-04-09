@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col s12">
 		<h1><%= contest.title %></h1>
-		<p>Cierra el <%= formatDateTime(contest.end_date) %></p>
+		<p>Cierra el <%= moment(contest.end_date).format("D [de] MMMM [a las] h:mm a") %></p>
 
 		<!-- PRICES AND WINNERS-->
 		<% if(contest.prize1 || contest.prize2 || contest.prize3) { %>
