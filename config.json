@@ -1,9 +1,9 @@
 {
 	"name": "concurso",
+	"caption": "Concursos",
 	"description": "Provee concursos de que te permiten ganarte premios espectaculares. Estos concursos son patrocinados por Apretaste y asociados.",
 	"category": "ocio",
 	"creator": "kumahavana@gmail.com",
 	"listed": true,
-	"guest":  true,
-	"caption": "Concursos"
+	"guest":  false
 }
