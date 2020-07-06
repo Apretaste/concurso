@@ -4,6 +4,14 @@
 	margin-bottom: 80px;
 }
 
+.space-top {
+	margin-top: 10px;
+}
+
+.avatar .circle {
+	background-size: contain;
+}
+
 /* ONE LINE COLLECTION */
 
 .collection.one-line .avatar {
