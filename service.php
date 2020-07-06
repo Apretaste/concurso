@@ -23,8 +23,7 @@ class Service
 			SELECT id, end_date, title, prize1, prize2, prize3 
 			FROM _concurso 
 			WHERE end_date >= NOW()
-			ORDER BY end_date ASC
-			LIMIT 10');
+			ORDER BY end_date ASC');
 
 		// message for empty contests
 		if (empty($contests)) {
