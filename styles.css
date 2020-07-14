@@ -51,3 +51,23 @@
 	margin-top: 0px;
 	margin-bottom: 0px;
 }
+
+/* TAGS */
+
+.chip .icon {
+	float: left;
+	font-size: 16px;
+	line-height: 32px;
+	padding-right: 5px;
+}
+
+.chip.tiny {
+	height: 20px;
+	padding: 0 10px;
+	line-height: 20px;
+	font-size: x-small;
+}
+
+.chip.tiny .icon {
+	line-height: 20px;
+}

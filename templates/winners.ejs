@@ -11,7 +11,7 @@
 	<div class="col s12">
 		<div class="message notice">
 			<i class="fas fa-exclamation-triangle"></i>
-			<p>Solo se muestran ganadores de los concursos de Apretaste</p>
+			<p>Solo se muestran ganadores de los concursos patrocinados por Apretaste</p>
 		</div>
 	</div>
 </div>
@@ -20,9 +20,9 @@
 	<div class="col s12">
 		<% for(var i=0; i < contests.length; i++) { %>
 			<% var contest = contests[i]; %>
-			<% if (contest.winner1avatar == '' || contest.winner1avatar == null) contest.winner1avatar = 'apretin'; %>
-			<% if (contest.winner2avatar == '' || contest.winner2avatar == null) contest.winner2avatar = 'apretin'; %>
-			<% if (contest.winner3avatar == '' || contest.winner3avatar == null) contest.winner3avatar = 'apretin'; %>
+			<% if (contest.winner_1avatar == '' || contest.winner_1avatar == null) contest.winner_1avatar = 'apretin'; %>
+			<% if (contest.winner_2avatar == '' || contest.winner_2avatar == null) contest.winner_2avatar = 'apretin'; %>
+			<% if (contest.winner_3avatar == '' || contest.winner_3avatar == null) contest.winner_3avatar = 'apretin'; %>
 			<% var uik = btoa(contest.title).substring(0, 5) + Math.floor(Math.random() * 1000); %>
 
 			<div class="card">
@@ -54,11 +54,11 @@
 					<div class="card-content grey lighten-4" style="padding: 12px;">
 						<% if(contest.prize1) { %>
 							<div id="tab1<%= uik %>">
-								<% if(contest.winner1) { %>
+								<% if(contest.winner_1) { %>
 									<ul class="collection" style="margin: 0; border: none;">
 										<li class="collection-item avatar grey lighten-4" style="min-height: auto;padding-top: 0;padding-bottom: 0;">
-											<div class="person-avatar circle" face="<%= contest.winner1avatar %>" color="<%= contest.winner1aColor %>" size="42"></div>
-											<span class="title"><a onclick="apretaste.send({'command':'PERFIL','data':{'username':'<%= contest.winner1 %>'}})">@<%= contest.winner1 %></a></span>
+											<div class="person-avatar circle" face="<%= contest.winner_1avatar %>" color="<%= contest.winner_1aColor %>" size="42"></div>
+											<span class="title"><a onclick="apretaste.send({'command':'PERFIL','data':{'username':'<%= contest.winner_1 %>'}})">@<%= contest.winner_1 %></a></span>
 											<p><%= contest.prize1 %></p>
 										</li>
 									</ul>
@@ -70,11 +70,11 @@
 						<% } %>
 						<% if(contest.prize2) { %>
 							<div id="tab2<%= uik %>">
-								<% if(contest.winner2) { %>
+								<% if(contest.winner_2) { %>
 									<ul class="collection" style="margin: 0; border: none;">
 										<li class="collection-item avatar grey lighten-4" style="min-height: auto;padding-top: 0;padding-bottom: 0;">
-											<div class="person-avatar circle" face="<%= contest.winner2avatar %>" color="<%= contest.winner2aColor %>" size="42"></div>
-											<span class="title"><a onclick="apretaste.send({'command':'PERFIL','data':{'username':'<%= contest.winner2 %>'}})">@<%= contest.winner2 %></a></span>
+											<div class="person-avatar circle" face="<%= contest.winner_2avatar %>" color="<%= contest.winner_2aColor %>" size="42"></div>
+											<span class="title"><a onclick="apretaste.send({'command':'PERFIL','data':{'username':'<%= contest.winner_2 %>'}})">@<%= contest.winner_2 %></a></span>
 											<p><%= contest.prize2 %></p>
 										</li>
 									</ul>
@@ -86,11 +86,11 @@
 						<% } %>
 						<% if(contest.prize3) { %>
 							<div id="tab3<%= uik %>">
-								<% if(contest.winner3) { %>
+								<% if(contest.winner_3) { %>
 									<ul class="collection" style="margin: 0; border: none;">
 										<li class="collection-item avatar grey lighten-4" style="min-height: auto;padding-top: 0;padding-bottom: 0;">
-											<div class="person-avatar circle" face="<%= contest.winner3avatar %>" color="<%= contest.winner3aColor %>" size="42"></div>
-											<span class="title"><a onclick="apretaste.send({'command':'PERFIL','data':{'username':'<%= contest.winner3 %>'}})">@<%= contest.winner3 %></a></span>
+											<div class="person-avatar circle" face="<%= contest.winner_3avatar %>" color="<%= contest.winner_3aColor %>" size="42"></div>
+											<span class="title"><a onclick="apretaste.send({'command':'PERFIL','data':{'username':'<%= contest.winner_3 %>'}})">@<%= contest.winner_3 %></a></span>
 											<p><%= contest.prize3 %></p>
 										</li>
 									</ul>
