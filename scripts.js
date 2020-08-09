@@ -6,7 +6,7 @@ $(document).ready(function () {
 var share;
 function init(contest) {
 	share = {
-		text: 'CONCURSO: ' + contest.body.substr(0, 100),
+		text: 'CONCURSO: ' + removeTags(contest.body).substr(0, 100),
 		icon: 'star',
 		send: function () {
 			apretaste.send({
@@ -37,4 +37,13 @@ function init(contest) {
 
 function toast(message){
 	M.toast({html: message});
+}
+
+
+function removeTags(str) {
+	if ((str===null) || (str===''))
+		return '';
+	else
+		str = str.toString();
+	return str.replace( /(<([^>]+)>)/ig, '');
 }
