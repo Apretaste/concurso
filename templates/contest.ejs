@@ -58,7 +58,6 @@
 	<a class="btn-floating btn-large waves-effect waves-light green" href="#!" onclick="apretaste.send({'command':'CONCURSO'})"><i class="material-icons">arrow_back</i></a>
 </div>
 
-
 <!-- SHARE MODAL -->
 <% init(contest) %>
 <div id="shareModal" class="modal">
@@ -68,7 +67,7 @@
 			<label for="message">Escriba un texto para compartir</label>
 		</div>
 		<ul class="collection one-line preview">
-			<li class="collection-item avatar">
+			<li class="collection-item avatar" style="min-height: 60px;">
 				<i class="fas fa-<%= share.icon %> material-icons circle"></i>
 				<span class="title"><%= share.text %></span>
 			</li>
