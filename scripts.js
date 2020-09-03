@@ -6,7 +6,7 @@ $(document).ready(function () {
 var share;
 function init(contest) {
 	share = {
-		text: 'CONCURSO: ' + removeTags(contest.body).substr(0, 100),
+		text: 'CONCURSO: ' + removeTags(contest.body).substr(0, 50) + '...',
 		icon: 'star',
 		send: function () {
 			apretaste.send({
