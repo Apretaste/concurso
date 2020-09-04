@@ -18,6 +18,13 @@
 	min-height: 0px;
 }
 
+/* PREVIEW COLLECTION */
+
+.collection.preview {
+	margin: 20px 0px 0px 0px;
+	min-height: 65px;
+}
+
 /* MESSAGES */
 
 .message {
