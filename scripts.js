@@ -3,10 +3,15 @@ $(document).ready(function () {
 	$('.modal').modal();
 });
 
+function teaser(text) {
+	return text.length <= 50 ? text : text.substr(0, 50) + "...";
+}
+
 var share;
+
 function init(contest) {
 	share = {
-		text: 'CONCURSO: ' + removeTags(contest.body).substr(0, 50) + '...',
+		text: teaser('CONCURSO: ' + removeTags(contest.body)),
 		icon: 'star',
 		send: function () {
 			apretaste.send({
